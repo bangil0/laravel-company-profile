@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/{path?}', function () {
+    return view('home');
 });
 
 Auth::routes();
 
 Route::group(['prefix' => 'backend'], function(){
-	Route::get('/', 'Backend\HomeController@index')->name('backend.home')->middleware('auth');
+	Route::get('/home', 'Backend\HomeController@index')->name('backend.home')->middleware('auth');
 
 	// Route Menu Page
 	Route::group(['prefix' => 'page', 'middleware' => 'auth'], function(){

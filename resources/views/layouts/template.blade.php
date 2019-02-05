@@ -118,6 +118,5 @@
         <!-- ./wrapper -->
         <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
-        <script src="/js/app.js"></script>
     </body>
 </html>
