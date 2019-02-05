@@ -49,4 +49,14 @@ Route::group(['prefix' => 'backend'], function(){
 		Route::put('/update/{id}', 'Backend\ContactController@update')->name('backend.contact.update');
 		Route::get('/destroy/{id}', 'Backend\ContactController@destroy')->name('backend.contact.destroy');
 	});
+
+	// Route Menu Post
+	Route::group(['prefix' => 'post', 'middleware' => 'auth'], function(){
+		Route::get('/', 'Backend\PostController@index')->name('backend.post.index');
+		Route::get('/create', 'Backend\PostController@create')->name('backend.post.create');
+		Route::post('/store', 'Backend\PostController@store')->name('backend.post.store');
+		Route::get('/edit/{id}', 'Backend\PostController@edit')->name('backend.post.edit');
+		Route::put('/update/{id}', 'Backend\PostController@update')->name('backend.post.update');
+		Route::get('/destroy/{id}', 'Backend\PostController@destroy')->name('backend.post.destroy');
+	});
 });

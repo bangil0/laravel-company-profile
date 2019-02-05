@@ -15,10 +15,17 @@ class Menu
 				'visible' 	=> true,
 			],
 			[
-				'label' 	=> 'Category',
+				'label' 	=> 'Post Category',
 				'url' 		=> 'backend.category.index',
 				'icon' 		=> 'file',
 				'active' 	=> \Ekko::isActiveRoute('backend.category.index') ? true : false,
+				'visible' 	=> true,
+			],
+			[
+				'label' 	=> 'Post',
+				'url' 		=> 'backend.post.index',
+				'icon' 		=> 'file',
+				'active' 	=> \Ekko::isActiveRoute('backend.post.index') ? true : false,
 				'visible' 	=> true,
 			],
 			[
