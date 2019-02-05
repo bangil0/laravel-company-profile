@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>AdminLTE 3 | Starter</title>
+        <title>Backend | Company Profile </title>
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="/css/app.css">
     </head>
@@ -85,8 +85,7 @@
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Starter Page</li>
+                                    {{ Breadcrumbs::render() }}
                                 </ol>
                             </div>
                             <!-- /.col -->
