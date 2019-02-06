@@ -1,4 +1,5 @@
 <script src="{{ url('js/jquery.min.js') }}"></script>
+<script src="{{ url('js/plugin/icon-picker/fontawesome-iconpicker.min.js') }}"></script>
 <script src="{{ url('js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ url('js/plugin/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('js/plugin/datatables/datatables.bootstrap4.js') }}"></script>
@@ -9,6 +10,7 @@
             responsive: true,
             processing: true,
         });
+        $('.icon-picker').iconpicker();
     });
     $(document).on('click', '#btn-delete', function(e) {
 	    e.preventDefault();

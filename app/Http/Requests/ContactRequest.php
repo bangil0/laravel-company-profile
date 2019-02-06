@@ -25,7 +25,7 @@ class ContactRequest extends FormRequest
     {
         return [
             'contact_name'    => 'required|min:3',
-            'contact_email'   => 'required',
+            'contact_email'   => 'required|email',
             'contact_subject' => 'required',
             'contact_message' => 'required'
         ];
@@ -36,6 +36,7 @@ class ContactRequest extends FormRequest
         return [
             'contact_name.required'    => 'Nama harus di isi',
             'contact_email.required'   => "Email harus di isi",
+            'contact_email.email'   => "Email format salah",
             'contact_subject.required' => 'Subject harus di isi',
             'contact_message.required' => "Pesan harus di isi",
         ];

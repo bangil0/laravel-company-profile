@@ -59,4 +59,14 @@ Route::group(['prefix' => 'backend'], function(){
 		Route::put('/update/{id}', 'Backend\PostController@update')->name('backend.post.update');
 		Route::get('/destroy/{id}', 'Backend\PostController@destroy')->name('backend.post.destroy');
 	});
+
+	// Route Menu Social Media
+	Route::group(['prefix' => 'socialmedia', 'middleware' => 'auth'], function(){
+		Route::get('/', 'Backend\SocialMediaController@index')->name('backend.socialmedia.index');
+		Route::get('/create', 'Backend\SocialMediaController@create')->name('backend.socialmedia.create');
+		Route::post('/store', 'Backend\SocialMediaController@store')->name('backend.socialmedia.store');
+		Route::get('/edit/{id}', 'Backend\SocialMediaController@edit')->name('backend.socialmedia.edit');
+		Route::put('/update/{id}', 'Backend\SocialMediaController@update')->name('backend.socialmedia.update');
+		Route::get('/destroy/{id}', 'Backend\SocialMediaController@destroy')->name('backend.socialmedia.destroy');
+	});
 });

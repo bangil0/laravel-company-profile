@@ -42,6 +42,13 @@ class Menu
 				'active' 	=> \Ekko::isActiveRoute('backend.contact.index') ? true : false,
 				'visible' 	=> true,
 			],
+			[
+				'label' 	=> 'Social Media',
+				'url' 		=> 'backend.socialmedia.index',
+				'icon' 		=> 'facebook-square',
+				'active' 	=> \Ekko::isActiveRoute('backend.socialmedia.index') ? true : false,
+				'visible' 	=> true,
+			],
 		];
 	}
 }	

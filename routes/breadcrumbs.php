@@ -72,3 +72,20 @@ Breadcrumbs::for('backend.contact.edit', function ($trail, $id) {
     $trail->parent('backend.contact.index');
     $trail->push($id, route('backend.contact.edit', $id));
 });
+
+// ----------------------
+// BreadCrumbs Social Media
+// ----------------------
+
+Breadcrumbs::for('backend.socialmedia.index', function ($trail) {
+    $trail->parent('backend.home');
+    $trail->push('Social Media', route('backend.contact.index'));
+});
+Breadcrumbs::for('backend.socialmedia.create', function ($trail) {
+    $trail->parent('backend.socialmedia.index');
+    $trail->push('Create', route('backend.socialmedia.create'));
+});
+Breadcrumbs::for('backend.socialmedia.edit', function ($trail, $id) {
+    $trail->parent('backend.socialmedia.index');
+    $trail->push($id, route('backend.socialmedia.edit', $id));
+});
