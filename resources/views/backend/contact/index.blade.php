@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="index-table">
                         <thead>
                             <th>Contact Name</th>
                             <th>Contact Email</th>
@@ -43,7 +43,7 @@
                                             </a> 
                                             <a 
                                                 href="{{ route('backend.contact.destroy', ['id' => $contact->id]) }}" 
-                                                id="btn-delete" 
+                                                id="btn-delete"
                                                 class="btn btn-danger btn-sm"
                                             >
                                                 Delete

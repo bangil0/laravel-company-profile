@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="index-table">
                         <thead>
                             <th>Category Name</th>
                             <th>Action</th>
@@ -35,7 +35,7 @@
                                             </a> 
                                             <a 
                                                 href="{{ route('backend.category.destroy', ['id' => $category->id]) }}" 
-                                                id="btn-delete" 
+                                                id="btn-delete"
                                                 class="btn btn-danger btn-sm"
                                             >
                                                 Delete

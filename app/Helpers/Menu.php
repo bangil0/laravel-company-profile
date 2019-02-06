@@ -17,14 +17,14 @@ class Menu
 			[
 				'label' 	=> 'Post Category',
 				'url' 		=> 'backend.category.index',
-				'icon' 		=> 'file',
+				'icon' 		=> 'reorder',
 				'active' 	=> \Ekko::isActiveRoute('backend.category.index') ? true : false,
 				'visible' 	=> true,
 			],
 			[
 				'label' 	=> 'Post',
 				'url' 		=> 'backend.post.index',
-				'icon' 		=> 'file',
+				'icon' 		=> 'feed',
 				'active' 	=> \Ekko::isActiveRoute('backend.post.index') ? true : false,
 				'visible' 	=> true,
 			],
@@ -38,7 +38,7 @@ class Menu
 			[
 				'label' 	=> 'Contact',
 				'url' 		=> 'backend.contact.index',
-				'icon' 		=> 'file',
+				'icon' 		=> 'envelope-open-o',
 				'active' 	=> \Ekko::isActiveRoute('backend.contact.index') ? true : false,
 				'visible' 	=> true,
 			],
