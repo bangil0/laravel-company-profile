@@ -1,11 +1,45 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import config from '../setting/Config';
+import SocialMedia from './SocialMedia';
 
 const styleFooter = {
 	textAlign: 'center'
 }
 
-export default class Main extends Component {
+class Footer extends Component {
+
+	constructor()
+	{
+		super()
+		this.state = {
+			result: [],
+		}
+	}
+	componentDidMount()
+	{
+		this.getSocialMedia();
+	}
+
+	getSocialMedia()
+	{
+		fetch(`${config.url}/socialmedia`)
+		.then((response) => response.json())
+		.then((responseJson) => {
+			this.setState({ result: responseJson});
+		})
+		.catch((error) => {
+            alert('Terjadi error. Silahkan refresh halaman')
+        });
+	}
+
+	renderResult()
+	{
+		if (Object.keys(this.state.result).length !== 0) {
+			return <SocialMedia result={this.state.result} />
+		}
+	}
+
     render() {
         return (
             <footer className="page-footer font-small cyan darken-3">
@@ -13,18 +47,7 @@ export default class Main extends Component {
 					<div className="row">
 						<div className="col-md-12 py-5" style={ styleFooter }>
 							<div className="mb-5 flex-center">
-								<a className="fb-ic">
-								<i className="fa fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-								</a>
-								<a className="tw-ic">
-								<i className="fa fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-								</a>
-								<a className="ins-ic">
-								<i className="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-								</a>
-								<a className="pin-ic">
-								<i className="fa fa-pinterest fa-lg white-text fa-2x"> </i>
-								</a>
+								{ this.renderResult() }
 							</div>
 						</div>
 					</div>
@@ -36,3 +59,5 @@ export default class Main extends Component {
         );
     }
 }
+
+export default Footer;

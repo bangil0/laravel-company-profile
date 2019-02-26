@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Category')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -28,13 +28,13 @@
                                     <td>
                                         <div role="group" aria-label="Record actions" class="btn-group">
                                             <a 
-                                                href="{{ route('backend.category.edit', ['id' => $category->id]) }}" 
+                                                href="{{ route('backend.category.edit', $category) }}" 
                                                 class="btn btn-success btn-sm"
                                             >
                                                 Edit
                                             </a> 
                                             <a 
-                                                href="{{ route('backend.category.destroy', ['id' => $category->id]) }}" 
+                                                href="{{ route('backend.category.destroy', $category) }}" 
                                                 id="btn-delete"
                                                 class="btn btn-danger btn-sm"
                                             >
@@ -46,7 +46,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $categorys->render() }}
                 </div>
             </div>
         </div>

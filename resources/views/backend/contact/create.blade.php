@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Contact')
 @section('content')
 <div class="row">
     <div class="col-lg-12">

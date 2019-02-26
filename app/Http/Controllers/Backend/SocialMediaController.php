@@ -3,20 +3,25 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\SocialMediaRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Crudable;
 use App\SocialMedia;
 
 class SocialMediaController extends Controller
 {
+
+    use Crudable;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $socialsmedia = SocialMedia::paginate(10);
+        $socialsmedia = SocialMedia::all();
         return view('backend.socialmedia.index', compact('socialsmedia'));
     }
 
@@ -25,6 +30,7 @@ class SocialMediaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('backend.socialmedia.create');
@@ -36,24 +42,14 @@ class SocialMediaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(SocialMediaRequest $request)
     {
         $socialmedia = SocialMedia::create($request->all());
         if($socialmedia){
-            $request->session()->flash('success', 'Data berhasil di simpan');
+            $this->flashSuccessCreate();
             return redirect()->route('backend.socialmedia.index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -62,9 +58,9 @@ class SocialMediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function edit(SocialMedia $socialmedia)
     {
-        $socialmedia = SocialMedia::findOrFail($id);
         return view('backend.socialmedia.edit', compact('socialmedia'));
     }
 
@@ -75,11 +71,13 @@ class SocialMediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SocialMediaRequest $request, $id)
+
+    public function update(SocialMediaRequest $request, SocialMedia $socialmedia)
     {
-        $socialmedia = SocialMedia::find($id)->update($request->all());
+        $socialmedia = $socialmedia->update($request->all());
+
         if($socialmedia){
-            $request->session()->flash('success', 'Data berhasil di update');
+            $this->flashSuccessUpdate();
             return redirect()->route('backend.socialmedia.index');
         }
     }
@@ -90,13 +88,12 @@ class SocialMediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    public function destroy(Request $request, SocialMedia $socialmedia)
     {
-        $socialmedia = SocialMedia::findOrFail($id);
-        if($socialmedia){
-            SocialMedia::find($id)->delete();
-            $request->session()->flash('success', 'Data berhasil di hapus');
-            return redirect()->route('backend.socialmedia.index');
+        if($socialmedia->delete()){
+            $this->flashSuccessDelete();
+            return redirect()->back();
         }
     }
 }

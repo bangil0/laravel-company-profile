@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Page')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -27,15 +27,18 @@
                                         {{ $page->page_name }}
                                     </td>
                                     <td>
-                                        {{ substr(strip_tags($page->page_description), 0, 100) }}..
+                                        {{ $page->body }}
                                     </td>
                                     <td>
                                         <div role="group" aria-label="Record actions" class="btn-group">
-                                            <a href="{{ route('backend.page.edit', ['id' => $page->id]) }}" class="btn btn-success btn-sm">
+                                            <a 
+                                                href="{{ route('backend.page.edit', $page) }}" 
+                                                class="btn btn-success btn-sm"
+                                            >
                                                 Edit
                                             </a> 
                                             <a 
-                                                href="{{ route('backend.page.destroy', ['id' => $page->id]) }}" 
+                                                href="{{ route('backend.page.destroy', $page) }}" 
                                                 id="btn-delete"
                                                 class="btn btn-danger btn-sm"
                                             >
@@ -47,7 +50,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $pages->render() }}
                 </div>
             </div>
         </div>

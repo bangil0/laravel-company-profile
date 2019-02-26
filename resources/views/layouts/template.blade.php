@@ -9,9 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Backend | Company Profile </title>
+        <title>@yield('title') | Company Profile </title>
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{ url('css/adminlte.min.css') }}">
         @include('includes.head')
     </head>
     <body class="hold-transition sidebar-mini">
@@ -82,7 +83,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Starter Page</h1>
+                                <h1 class="m-0 text-dark">@yield('title')</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
@@ -120,7 +121,7 @@
         <!-- ./wrapper -->
         <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
-
         @include('includes.js')
+        <script src="{{ url('/js/adminlte.min.js') }}"></script>
     </body>
 </html>

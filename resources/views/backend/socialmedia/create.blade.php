@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Social Media')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label>Icon</label>
-                    {!! Form::text('icon', "fa-anchor", ["class" => "form-control icon-picker"]) !!}
+                    {!! Form::text('icon', null, ["class" => "form-control"]) !!}
                 </div>
             </div>
         </div>

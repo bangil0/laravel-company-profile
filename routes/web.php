@@ -11,62 +11,115 @@
 |
 */
 
-Route::get('/{path?}', function () {
-    return view('home');
+Route::get('{path?}', function(){
+	return view('home');
 });
+
 
 Auth::routes();
 
 Route::group(['prefix' => 'backend'], function(){
+
+	// Route Menu Home
 	Route::get('/home', 'Backend\HomeController@index')->name('backend.home')->middleware('auth');
 
 	// Route Menu Page
-	Route::group(['prefix' => 'page', 'middleware' => 'auth'], function(){
-		Route::get('/', 'Backend\PageController@index')->name('backend.page.index');
-		Route::get('/create', 'Backend\PageController@create')->name('backend.page.create');
-		Route::post('/store', 'Backend\PageController@store')->name('backend.page.store');
-		Route::get('/edit/{id}', 'Backend\PageController@edit')->name('backend.page.edit');
-		Route::put('/update/{id}', 'Backend\PageController@update')->name('backend.page.update');
-		Route::get('/destroy/{id}', 'Backend\PageController@destroy')->name('backend.page.destroy');
-	});
+	Route::namespace('Backend')
+        	->name('backend.page.')
+        	->middleware('auth')
+        	->prefix('page')
+        	->group(function () {
+            	Route::get('', 'PageController@index')->name('index');
+            	Route::get('create', 'PageController@create')->name('create');
+            	Route::post('', 'PageController@store')->name('store');
+            	Route::get('{page}/edit', 'PageController@edit')->name('edit');
+            	Route::put('{page}', 'PageController@update')->name('update');
+            	Route::get('{page}/destroy', 'PageController@destroy')->name('destroy');
+        	});
 
-	// Route Menu Post Category
-	Route::group(['prefix' => 'category', 'middleware' => 'auth'], function(){
-		Route::get('/', 'Backend\PostCategoryController@index')->name('backend.category.index');
-		Route::get('/create', 'Backend\PostCategoryController@create')->name('backend.category.create');
-		Route::post('/store', 'Backend\PostCategoryController@store')->name('backend.category.store');
-		Route::get('/edit/{id}', 'Backend\PostCategoryController@edit')->name('backend.category.edit');
-		Route::put('/update/{id}', 'Backend\PostCategoryController@update')->name('backend.category.update');
-		Route::get('/destroy/{id}', 'Backend\PostCategoryController@destroy')->name('backend.category.destroy');
-	});
+   	// Route Menu Post Category
+	Route::namespace('Backend')
+        	->name('backend.category.')
+        	->middleware('auth')
+        	->prefix('category')
+        	->group(function () {
+            	Route::get('', 'PostCategoryController@index')->name('index');
+            	Route::get('create', 'PostCategoryController@create')->name('create');
+            	Route::post('', 'PostCategoryController@store')->name('store');
+            	Route::get('{category}/edit', 'PostCategoryController@edit')->name('edit');
+            	Route::put('{category}', 'PostCategoryController@update')->name('update');
+            	Route::get('{category}/destroy', 'PostCategoryController@destroy')->name('destroy');
+        	});
 
-	// Route Menu Contact
-	Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function(){
-		Route::get('/', 'Backend\ContactController@index')->name('backend.contact.index');
-		Route::get('/create', 'Backend\ContactController@create')->name('backend.contact.create');
-		Route::post('/store', 'Backend\ContactController@store')->name('backend.contact.store');
-		Route::get('/edit/{id}', 'Backend\ContactController@edit')->name('backend.contact.edit');
-		Route::put('/update/{id}', 'Backend\ContactController@update')->name('backend.contact.update');
-		Route::get('/destroy/{id}', 'Backend\ContactController@destroy')->name('backend.contact.destroy');
-	});
+    // Route Menu Contact
+	Route::namespace('Backend')
+        	->name('backend.contact.')
+        	->middleware('auth')
+        	->prefix('contact')
+        	->group(function () {
+            	Route::get('', 'ContactController@index')->name('index');
+            	Route::get('create', 'ContactController@create')->name('create');
+            	Route::post('', 'ContactController@store')->name('store');
+            	Route::get('{contact}/edit', 'ContactController@edit')->name('edit');
+            	Route::put('{contact}', 'ContactController@update')->name('update');
+            	Route::get('{contact}/destroy', 'ContactController@destroy')->name('destroy');
+        	});
 
-	// Route Menu Post
-	Route::group(['prefix' => 'post', 'middleware' => 'auth'], function(){
-		Route::get('/', 'Backend\PostController@index')->name('backend.post.index');
-		Route::get('/create', 'Backend\PostController@create')->name('backend.post.create');
-		Route::post('/store', 'Backend\PostController@store')->name('backend.post.store');
-		Route::get('/edit/{id}', 'Backend\PostController@edit')->name('backend.post.edit');
-		Route::put('/update/{id}', 'Backend\PostController@update')->name('backend.post.update');
-		Route::get('/destroy/{id}', 'Backend\PostController@destroy')->name('backend.post.destroy');
-	});
+    // Route Menu Contact
+	Route::namespace('Backend')
+        	->name('backend.post.')
+        	->middleware('auth')
+        	->prefix('post')
+        	->group(function () {
+            	Route::get('', 'PostController@index')->name('index');
+            	Route::get('create', 'PostController@create')->name('create');
+            	Route::post('', 'PostController@store')->name('store');
+            	Route::get('{post}/edit', 'PostController@edit')->name('edit');
+            	Route::put('{post}', 'PostController@update')->name('update');
+            	Route::get('{post}/destroy', 'PostController@destroy')->name('destroy');
+        	});
 
-	// Route Menu Social Media
-	Route::group(['prefix' => 'socialmedia', 'middleware' => 'auth'], function(){
-		Route::get('/', 'Backend\SocialMediaController@index')->name('backend.socialmedia.index');
-		Route::get('/create', 'Backend\SocialMediaController@create')->name('backend.socialmedia.create');
-		Route::post('/store', 'Backend\SocialMediaController@store')->name('backend.socialmedia.store');
-		Route::get('/edit/{id}', 'Backend\SocialMediaController@edit')->name('backend.socialmedia.edit');
-		Route::put('/update/{id}', 'Backend\SocialMediaController@update')->name('backend.socialmedia.update');
-		Route::get('/destroy/{id}', 'Backend\SocialMediaController@destroy')->name('backend.socialmedia.destroy');
-	});
+    // Route Menu Social Media
+	Route::namespace('Backend')
+        	->name('backend.socialmedia.')
+        	->middleware('auth')
+        	->prefix('socialmedia')
+        	->group(function () {
+            	Route::get('', 'SocialMediaController@index')->name('index');
+            	Route::get('create', 'SocialMediaController@create')->name('create');
+            	Route::post('', 'SocialMediaController@store')->name('store');
+            	Route::get('{socialmedia}/edit', 'SocialMediaController@edit')->name('edit');
+            	Route::put('{socialmedia}', 'SocialMediaController@update')->name('update');
+            	Route::get('{socialmedia}/destroy', 'SocialMediaController@destroy')->name('destroy');
+        	});
+
+    // Route Menu Item
+	Route::namespace('Backend')
+        	->name('backend.item.')
+        	->middleware('auth')
+        	->prefix('item')
+        	->group(function () {
+            	Route::get('', 'ItemController@index')->name('index');
+            	Route::get('create', 'ItemController@create')->name('create');
+            	Route::post('', 'ItemController@store')->name('store');
+            	Route::get('{item}/edit', 'ItemController@edit')->name('edit');
+            	Route::get('{item}/show', 'ItemController@show')->name('show');
+            	Route::put('{item}', 'ItemController@update')->name('update');
+            	Route::get('{item}/destroy', 'ItemController@destroy')->name('destroy');
+        	});
+
+    // Route Menu Item Detail
+	Route::namespace('Backend')
+        	->name('backend.itemdetail.')
+        	->middleware('auth')
+        	->prefix('itemdetail')
+        	->group(function () {
+            	Route::get('', 'ItemDetailController@index')->name('index');
+            	Route::get('{item}/create', 'ItemDetailController@create')->name('create');
+            	Route::post('{item}', 'ItemDetailController@store')->name('store');
+            	Route::get('{itemdetail}/edit', 'ItemDetailController@edit')->name('edit');
+            	Route::get('{itemdetail}/show', 'ItemDetailController@show')->name('show');
+            	Route::put('{itemdetail}', 'ItemDetailController@update')->name('update');
+            	Route::get('{itemdetail}/destroy', 'ItemDetailController@destroy')->name('destroy');
+        	});
 });

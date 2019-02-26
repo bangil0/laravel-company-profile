@@ -15,6 +15,7 @@ require('./bootstrap');
 
  import React, { Component } from 'react';
  import ReactDOM from 'react-dom';
+ import '../../node_modules/font-awesome/css/font-awesome.min.css'; 
  import Header from './components/Header';
  import Main from './components/Main';
  import Footer from './components/Footer';
@@ -24,7 +25,8 @@ require('./bootstrap');
   Route,
   Link,
   Switch,
-  Redirect
+  Redirect,
+  HashRouter
 } from 'react-router-dom'
 
  class App extends Component {

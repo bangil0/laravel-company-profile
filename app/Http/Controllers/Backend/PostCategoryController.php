@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
+use CodeHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Crudable;
 use App\Http\Requests\PostCategoryRequest;
 use App\PostCategory;
-use CodeHelper;
 
 class PostCategoryController extends Controller
 {
+
+    use Crudable;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $categorys = PostCategory::paginate(10);
+        $categorys = PostCategory::all();
         return view('backend.category.index', compact('categorys'));
     }
 
@@ -26,6 +31,7 @@ class PostCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('backend.category.create');
@@ -37,25 +43,15 @@ class PostCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(PostCategoryRequest $request)
     {
         $request->request->add(['category_slug' => CodeHelper::slug($request->category_name)]);
         $category = PostCategory::create($request->all());
         if($category){
-            $request->session()->flash('success', 'Data berhasil di simpan');
+            $this->flashSuccessCreate();
             return redirect()->route('backend.category.index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -64,9 +60,9 @@ class PostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function edit(PostCategory $category)
     {
-        $category = PostCategory::findOrFail($id);
         return view('backend.category.edit', compact('category'));
     }
 
@@ -77,12 +73,14 @@ class PostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostCategoryRequest $request, $id)
+
+    public function update(PostCategoryRequest $request, PostCategory $category)
     {
         $request->request->add(['category_slug' => CodeHelper::slug($request->category_name)]);
-        $category = PostCategory::find($id)->update($request->all());
+        $category = $category->update($request->all());
+
         if($category){
-            $request->session()->flash('success', 'Data berhasil di update');
+            $this->flashSuccessUpdate();
             return redirect()->route('backend.category.index');
         }
     }
@@ -93,13 +91,12 @@ class PostCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+
+    public function destroy(Request $request, PostCategory $category)
     {
-        $category = PostCategory::findOrFail($id);
-        if($category){
-            PostCategory::find($id)->delete();
-            $request->session()->flash('success', 'Data berhasil di hapus');
-            return redirect()->route('backend.category.index');
+        if($category->delete()){
+            $this->flashSuccessDelete();
+            return redirect()->back();
         }
     }
 }

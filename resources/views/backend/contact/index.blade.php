@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Contact')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -36,13 +36,13 @@
                                     <td>
                                         <div role="group" aria-label="Record actions" class="btn-group">
                                             <a 
-                                                href="{{ route('backend.contact.edit', ['id' => $contact->id]) }}" 
+                                                href="{{ route('backend.contact.edit', $contact) }}" 
                                                 class="btn btn-success btn-sm"
                                             >
                                                 Edit
                                             </a> 
                                             <a 
-                                                href="{{ route('backend.contact.destroy', ['id' => $contact->id]) }}" 
+                                                href="{{ route('backend.contact.destroy', $contact) }}" 
                                                 id="btn-delete"
                                                 class="btn btn-danger btn-sm"
                                             >
@@ -54,7 +54,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $contacts->render() }}
                 </div>
             </div>
         </div>

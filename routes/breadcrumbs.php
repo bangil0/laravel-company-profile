@@ -17,9 +17,9 @@ Breadcrumbs::for('backend.category.create', function ($trail) {
     $trail->parent('backend.category.index');
     $trail->push('Create', route('backend.category.create'));
 });
-Breadcrumbs::for('backend.category.edit', function ($trail, $id) {
+Breadcrumbs::for('backend.category.edit', function ($trail, $category) {
     $trail->parent('backend.category.index');
-    $trail->push($id, route('backend.category.edit', $id));
+    $trail->push($category->category_name, route('backend.category.edit', $category));
 });
 
 // ----------------------
@@ -34,9 +34,9 @@ Breadcrumbs::for('backend.post.create', function ($trail) {
     $trail->parent('backend.category.index');
     $trail->push('Create', route('backend.post.create'));
 });
-Breadcrumbs::for('backend.post.edit', function ($trail, $id) {
+Breadcrumbs::for('backend.post.edit', function ($trail, $post) {
     $trail->parent('backend.post.index');
-    $trail->push($id, route('backend.post.edit', $id));
+    $trail->push($post->post_name, route('backend.post.edit', $post));
 });
 
 // ----------------------
@@ -51,9 +51,9 @@ Breadcrumbs::for('backend.page.create', function ($trail) {
     $trail->parent('backend.category.index');
     $trail->push('Create', route('backend.page.create'));
 });
-Breadcrumbs::for('backend.page.edit', function ($trail, $id) {
+Breadcrumbs::for('backend.page.edit', function ($trail, $page) {
     $trail->parent('backend.page.index');
-    $trail->push($id, route('backend.page.edit', $id));
+    $trail->push($page->page_name, route('backend.page.edit', $page));
 });
 
 // ----------------------
@@ -68,9 +68,9 @@ Breadcrumbs::for('backend.contact.create', function ($trail) {
     $trail->parent('backend.category.index');
     $trail->push('Create', route('backend.contact.create'));
 });
-Breadcrumbs::for('backend.contact.edit', function ($trail, $id) {
+Breadcrumbs::for('backend.contact.edit', function ($trail, $contact) {
     $trail->parent('backend.contact.index');
-    $trail->push($id, route('backend.contact.edit', $id));
+    $trail->push($contact->contact_name, route('backend.contact.edit', $contact));
 });
 
 // ----------------------
@@ -85,7 +85,47 @@ Breadcrumbs::for('backend.socialmedia.create', function ($trail) {
     $trail->parent('backend.socialmedia.index');
     $trail->push('Create', route('backend.socialmedia.create'));
 });
-Breadcrumbs::for('backend.socialmedia.edit', function ($trail, $id) {
+Breadcrumbs::for('backend.socialmedia.edit', function ($trail, $socialmedia) {
     $trail->parent('backend.socialmedia.index');
-    $trail->push($id, route('backend.socialmedia.edit', $id));
+    $trail->push($socialmedia->name, route('backend.socialmedia.edit', $socialmedia));
+});
+
+// ----------------------
+// BreadCrumbs Item
+// ----------------------
+
+Breadcrumbs::for('backend.item.index', function ($trail) {
+    $trail->parent('backend.home');
+    $trail->push('Item', route('backend.item.index'));
+});
+Breadcrumbs::for('backend.item.create', function ($trail) {
+    $trail->parent('backend.item.index');
+    $trail->push('Create', route('backend.item.create'));
+});
+Breadcrumbs::for('backend.item.edit', function ($trail, $item) {
+    $trail->parent('backend.item.index');
+    $trail->push($item->item_name, route('backend.item.edit', $id));
+});
+Breadcrumbs::for('backend.item.show', function ($trail, $item) {
+    $trail->parent('backend.item.index');
+    $trail->push($item->item_name, route('backend.item.show', $item));
+});
+
+
+
+// ----------------------
+// BreadCrumbs Item Detail
+// ----------------------
+
+Breadcrumbs::for('backend.itemdetail.index', function ($trail) {
+    $trail->parent('backend.home');
+    $trail->push('Item Detail', route('backend.itemdetail.index'));
+});
+Breadcrumbs::for('backend.itemdetail.create', function ($trail, $item) {
+    $trail->parent('backend.itemdetail.index');
+    $trail->push($item->item_name, route('backend.itemdetail.create', $item));
+});
+Breadcrumbs::for('backend.itemdetail.edit', function ($trail, $itemdetail) {
+    $trail->parent('backend.itemdetail.index');
+    $trail->push($itemdetail->item_detail_name, route('backend.itemdetail.edit', $itemdetail));
 });

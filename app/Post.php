@@ -14,7 +14,7 @@ class Post extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\PostCategory', 'category_id', 'id');
+        return $this->belongsTo(PostCategory::class);
     }
 
     public static function upload($request)
@@ -25,5 +25,10 @@ class Post extends Model
         $file->move($path, $file_name);
 
         return $file_name;
+    }
+
+    public function getBodyAttribute()
+    {
+        return \Parsedown::instance()->text($this->post_description);
     }
 }

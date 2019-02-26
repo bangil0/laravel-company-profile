@@ -29,6 +29,13 @@ class Menu
 				'visible' 	=> true,
 			],
 			[
+				'label' 	=> 'Custom Post',
+				'url' 		=> 'backend.item.index',
+				'icon' 		=> 'file',
+				'active' 	=> \Ekko::isActiveRoute('backend.item.index') ? true : false,
+				'visible' 	=> true,
+			],
+			[
 				'label' 	=> 'Page',
 				'url' 		=> 'backend.page.index',
 				'icon' 		=> 'file',

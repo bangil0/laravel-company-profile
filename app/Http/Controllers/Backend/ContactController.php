@@ -3,20 +3,25 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Crudable;
 use App\Contact;
 
 class ContactController extends Controller
 {
+
+    use Crudable;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $contacts = Contact::paginate(10);
+        $contacts = Contact::all();
         return view('backend.contact.index', compact('contacts'));
     }
 
@@ -25,6 +30,7 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('backend.contact.create');
@@ -36,24 +42,14 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(ContactRequest $request)
     {
         $contact = Contact::create($request->all());
         if($contact){
-            $request->session()->flash('success', 'Data berhasil di simpan');
+            $this->flashSuccessCreate();
             return redirect()->route('backend.contact.index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -62,9 +58,9 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function edit(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
         return view('backend.contact.edit', compact('contact'));
     }
 
@@ -75,11 +71,13 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactRequest $request, $id)
+    
+    public function update(ContactRequest $request, Contact $contact)
     {
-        $contact = Contact::find($id)->update($request->all());
+        $contact = $contact->update($request->all());
+
         if($contact){
-            $request->session()->flash('success', 'Data berhasil di update');
+            $this->flashSuccessUpdate();
             return redirect()->route('backend.contact.index');
         }
     }
@@ -90,13 +88,12 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+
+    public function destroy(Request $request, Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
-        if($contact){
-            Contact::find($id)->delete();
-            $request->session()->flash('success', 'Data berhasil di hapus');
-            return redirect()->route('backend.contact.index');
+        if($contact->delete()){
+            $this->flashSuccessDelete();
+            return redirect()->back();
         }
     }
 }

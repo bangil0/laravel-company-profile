@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Social Media')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -36,13 +36,13 @@
                                     <td>
                                         <div role="group" aria-label="Record actions" class="btn-group">
                                             <a 
-                                                href="{{ route('backend.socialmedia.edit', ['id' => $socialmedia->id]) }}" 
+                                                href="{{ route('backend.socialmedia.edit', $socialmedia) }}" 
                                                 class="btn btn-success btn-sm"
                                             >
                                                 Edit
                                             </a> 
                                             <a 
-                                                href="{{ route('backend.socialmedia.destroy', ['id' => $socialmedia->id]) }}" 
+                                                href="{{ route('backend.socialmedia.destroy', $socialmedia) }}" 
                                                 id="btn-delete"
                                                 class="btn btn-danger btn-sm"
                                             >
@@ -54,7 +54,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $socialsmedia->render() }}
                 </div>
             </div>
         </div>

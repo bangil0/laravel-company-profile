@@ -1,5 +1,5 @@
 @extends('layouts.template')
-
+@section('title', 'Post')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -32,7 +32,7 @@
                                         {{ $post->post_name }}
                                     </td>
                                     <td>
-                                        {{ $post->post_description }}
+                                        {{ strip_tags($post->body) }}
                                     </td>
                                     <td>
                                         @if(!empty($post->post_image) 
@@ -66,7 +66,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $posts->render() }}
                 </div>
             </div>
         </div>

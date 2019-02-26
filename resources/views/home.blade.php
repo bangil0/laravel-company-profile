@@ -7,7 +7,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Company Profile</title>
         <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/plugin/font-awesome/css/font-awesome.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/clean-blog.min.css') }}">
     </head>
     <body>
         <div id="app">

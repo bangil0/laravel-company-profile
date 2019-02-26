@@ -1,4 +1,6 @@
 <script src="{{ url('js/jquery.min.js') }}"></script>
+<script src="{{ url('js/bootstrap.min.js') }}"></script>
+<script src="{{ url('js/plugin/summernote/summernote.min.js') }}"></script>
 <script src="{{ url('js/plugin/icon-picker/fontawesome-iconpicker.min.js') }}"></script>
 <script src="{{ url('js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ url('js/plugin/datatables/jquery.dataTables.min.js') }}"></script>

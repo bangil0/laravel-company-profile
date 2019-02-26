@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PageRequest;
-use App\Page;
 use CodeHelper;
+use Illuminate\Http\Request;
+use App\Http\Requests\PageRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Crudable;
+use App\Page;
 
 class PageController extends Controller
 {
+
+    use Crudable;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $pages = Page::paginate(10);
+        $pages = Page::all();
         return view('backend.page.index', compact('pages'));
     }
 
@@ -26,6 +31,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('backend.page.create');
@@ -37,25 +43,15 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(PageRequest $request)
     {
         $request->request->add(['page_slug' => CodeHelper::slug($request->page_name)]);
         $page = Page::create($request->all());
         if($page){
-            $request->session()->flash('success', 'Data berhasil di simpan');
+            $this->flashSuccessCreate();
             return redirect()->route('backend.page.index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -64,9 +60,9 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function edit(Page $page)
     {
-        $page = Page::findOrFail($id);
         return view('backend.page.edit', compact('page'));
     }
 
@@ -77,12 +73,14 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PageRequest $request, $id)
+
+    public function update(PageRequest $request, Page $page)
     {
         $request->request->add(['page_slug' => CodeHelper::slug($request->page_name)]);
-        $page = Page::find($id)->update($request->all());
+        $page = $page->update($request->all());
+
         if($page){
-            $request->session()->flash('success', 'Data berhasil di update');
+            $this->flashSuccessUpdate();
             return redirect()->route('backend.page.index');
         }
     }
@@ -93,13 +91,12 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+
+    public function destroy(Request $request, Page $page)
     {
-        $page = Page::findOrFail($id);
-        if($page){
-            Page::find($id)->delete();
-            $request->session()->flash('success', 'Data berhasil di hapus');
-            return redirect()->route('backend.page.index');
+        if($page->delete()){
+            $this->flashSuccessDelete();
+            return redirect()->back();
         }
     }
 }
