@@ -29,26 +29,6 @@ class ItemDetail extends Model
 
     public function getBodyAttribute()
     {
-        return \Parsedown::instance()->text($this->item_detail_description);
-    }
-
-    public function getShowLinkAttribute()
-    {
-        return $this->haveLink();
-    }
-
-    public function getShowPeopleAttribute()
-    {
-        return $this->havePeople();
-    }
-
-    public function haveLink()
-    {
-        return !empty($this->item_detail_link) ? "show_link" : "";
-    }
-
-    public function havePeople()
-    {
-        return !empty($this->item_detail_people) ? "show_people" : "";
+        return substr(strip_tags($this->item_detail_description), 0, 100)."..";
     }
 }

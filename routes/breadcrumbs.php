@@ -129,3 +129,12 @@ Breadcrumbs::for('backend.itemdetail.edit', function ($trail, $itemdetail) {
     $trail->parent('backend.itemdetail.index');
     $trail->push($itemdetail->item_detail_name, route('backend.itemdetail.edit', $itemdetail));
 });
+
+// ----------------------
+// BreadCrumbs Company Profile
+// ----------------------
+
+Breadcrumbs::for('backend.profile.index', function ($trail) {
+    $trail->parent('backend.home');
+    $trail->push('Company Profile', route('backend.profile.index'));
+});

@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label>Page Description</label>
-                    {!! Form::textarea('page_description', $page->page_description, ["class" => "form-control", "rows" => 5]) !!}
+                    {!! Form::textarea('page_description', $page->page_description, ["class" => "form-control summernote", "rows" => 5]) !!}
                 </div>
             </div>
         </div>

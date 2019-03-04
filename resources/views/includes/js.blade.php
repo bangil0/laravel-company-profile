@@ -14,6 +14,7 @@
         });
         $('.icon-picker').iconpicker();
     });
+    $(".summernote").summernote();
     $(document).on('click', '#btn-delete', function(e) {
 	    e.preventDefault();
 	    var link = $(this);

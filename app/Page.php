@@ -12,6 +12,6 @@ class Page extends Model
 
 	public function getBodyAttribute()
     {
-        return \Parsedown::instance()->text($this->page_description);
+        return substr(strip_tags($this->page_description), 0, 100)."..";
     }
 }

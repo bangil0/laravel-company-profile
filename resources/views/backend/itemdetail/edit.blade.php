@@ -42,11 +42,11 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group {{ $itemdetail->show_link }} link" style="display: none;">
+                <div class="form-group">
                     <label>Link</label>
                     {!! Form::text('item_detail_link', $itemdetail->item_detail_link, ["class" => "form-control"]) !!}
                 </div>
-                <div class="form-group {{ $itemdetail->show_people }} author" style="display: none">
+                <div class="form-group">
                     <label>Author</label>
                     {!! Form::text('item_detail_people', $itemdetail->item_detail_people, ["class" => "form-control"]) !!}
                 </div>

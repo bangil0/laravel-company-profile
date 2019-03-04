@@ -83,7 +83,7 @@ class ItemDetailController extends Controller
         $itemdetail->update($request->all());
         if($itemdetail){
             $this->flashSuccessUpdate();
-            return redirect()->route('backend.itemdetail.index');
+            return redirect()->route('backend.item.show', $itemdetail->item_id);
         }
     }
 

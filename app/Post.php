@@ -29,6 +29,6 @@ class Post extends Model
 
     public function getBodyAttribute()
     {
-        return \Parsedown::instance()->text($this->post_description);
+        return substr(strip_tags($this->post_description), 0, 100)."..";
     }
 }

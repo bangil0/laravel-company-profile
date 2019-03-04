@@ -17,6 +17,6 @@ class Item extends Model
 
     public function getBodyAttribute()
     {
-        return \Parsedown::instance()->text($this->item_description);
+        return substr(strip_tags($this->item_description), 0, 100);
     }
 }

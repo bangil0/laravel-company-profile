@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ReactHtmlParser from 'react-html-parser';
 import config from '../setting/Config';
-import GalleryItem from './GalleryItem';
 
-export default class Gallery extends Component {
+export default class AboutPage extends Component {
 
 	constructor()
 	{
@@ -14,14 +14,15 @@ export default class Gallery extends Component {
 	}
 	componentDidMount()
 	{
-		this.getPageGallery();
+		this.getPageAbout();
 	}
 
-	getPageGallery()
+	getPageAbout()
 	{
-		fetch(`${config.url}/pagegallery`)
+		fetch(`${config.url}/pageabout`)
 		.then((response) => response.json())
 		.then((responseJson) => {
+			console.log(responseJson);
 			this.setState({ result: responseJson});
 		})
 		.catch((error) => {
@@ -29,17 +30,10 @@ export default class Gallery extends Component {
         });
 	}
 
-	renderResult()
-	{
-		if (Object.keys(this.state.result).length !== 0) {
-			return <GalleryItem result={this.state.result.itemdetail} />
-		}
-	}
-
     render() {
         return (
-            <div className="col-md-12">
-                { this.renderResult() }
+            <div className="container">
+                {ReactHtmlParser(this.state.result.page_description)}
             </div>
         );
     }

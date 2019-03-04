@@ -13,21 +13,14 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- import React, { Component } from 'react';
- import ReactDOM from 'react-dom';
- import '../../node_modules/font-awesome/css/font-awesome.min.css'; 
- import Header from './components/Header';
- import Main from './components/Main';
- import Footer from './components/Footer';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import '../../node_modules/font-awesome/css/font-awesome.min.css'; 
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
 
- import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect,
-  HashRouter
-} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
  class App extends Component {
  	render(){

@@ -11,17 +11,16 @@
 |
 */
 
-Route::get('{path?}', function(){
+Route::get('{all}', function(){
 	return view('home');
-});
-
-
-Auth::routes();
+})->where('all', '^(?!backend).*$');;
 
 Route::group(['prefix' => 'backend'], function(){
 
+    Auth::routes();
+
 	// Route Menu Home
-	Route::get('/home', 'Backend\HomeController@index')->name('backend.home')->middleware('auth');
+	Route::get('', 'Backend\HomeController@index')->name('backend.home')->middleware('auth');
 
 	// Route Menu Page
 	Route::namespace('Backend')
@@ -122,4 +121,15 @@ Route::group(['prefix' => 'backend'], function(){
             	Route::put('{itemdetail}', 'ItemDetailController@update')->name('update');
             	Route::get('{itemdetail}/destroy', 'ItemDetailController@destroy')->name('destroy');
         	});
+
+    // Route Menu Company Profile
+    Route::namespace('Backend')
+            ->name('backend.profile.')
+            ->middleware('auth')
+            ->prefix('company-profile')
+            ->group(function () {
+                Route::get('', 'CompanyProfileController@index')->name('index');
+                Route::get('create', 'CompanyProfileController@create')->name('create');
+                Route::put('{id}', 'CompanyProfileController@update')->name('update');
+            });
 });
