@@ -21,32 +21,14 @@
             <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-header">15 Notifications</span>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                            <i class="fa fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                            <i class="fa fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                            <i class="fa fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                        </div>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -55,9 +37,12 @@
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="index3.html" class="brand-link">
-                <img src="{{ asset("img/AdminLTELogo.png") }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">Company Profile</span>
+                    <img 
+                        src="{{ url(App\CompanyProfile::IMAGE_PATH.$siteLogo) ? url(App\CompanyProfile::IMAGE_PATH.$siteLogo) : asset("img/AdminLTELogo.png") }}"
+                        style="opacity: .8"
+                        class="brand-image img-circle elevation-3"
+                    >
+                    <span class="brand-text font-weight-light">{{ $siteTitle ? $siteTitle : "Company Profile" }}</span>
                 </a>
                 <!-- Sidebar -->
                 <div class="sidebar">

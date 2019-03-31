@@ -13,7 +13,7 @@
 
 Route::get('{all}', function(){
 	return view('home');
-})->where('all', '^(?!backend).*$');;
+})->where('all', '^(?!backend).*$');
 
 Route::group(['prefix' => 'backend'], function(){
 
@@ -64,7 +64,7 @@ Route::group(['prefix' => 'backend'], function(){
             	Route::get('{contact}/destroy', 'ContactController@destroy')->name('destroy');
         	});
 
-    // Route Menu Contact
+    // Route Menu Post
 	Route::namespace('Backend')
         	->name('backend.post.')
         	->middleware('auth')

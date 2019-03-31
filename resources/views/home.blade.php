@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/plugin/font-awesome/css/font-awesome.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/clean-blog.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/custom.css') }}">
     </head>
     <body>
         <div id="app">

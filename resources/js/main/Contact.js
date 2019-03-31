@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import config from '../setting/Config';
+import ErrorForm from '../components/ErrorForm';
+import SuccessForm from '../components/SuccessForm';
 
 export default class Contact extends Component {
 	
@@ -11,8 +13,8 @@ export default class Contact extends Component {
       		contact_email: '',
       		contact_subject: '',
       		contact_message: '',
-            alert: '',
-            message: '',
+            response: {},
+            errors: {},
     	};
 
     	this.handleChange = this.handleChange.bind(this);
@@ -28,31 +30,52 @@ export default class Contact extends Component {
 
 	handleSubmit(event) {
     	event.preventDefault();
+        const { contact_name, contact_email, contact_subject, contact_message } = this.state;
     	fetch(`${config.url}/contact`, {
     		method: 'POST',
-      		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      		body: {
-        		contact_name: this.state.contact_name,
-        		contact_email: this.state.contact_email,
-        		contact_subject: this.state.contact_subject,
-        		contact_message: this.state.contact_message
-    		}
+      		headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+      		body: JSON.stringify({
+        		contact_name: contact_name,
+        		contact_email: contact_email,
+        		contact_subject: contact_subject,
+        		contact_message: contact_message
+    		})
 		})
         .then((response) => response.json())
         .then((responseJson) => {
-            const { status, message } = responseJson;
-            this.setState({
-                alert: status === "success" ? "success" : "danger",
-                message: message,
-            })
+            const { status, message, errors } = responseJson;
+            if(status === 'success'){
+                this.setState({ response: responseJson, errors:{}, contact_name: '', contact_subject: '', contact_email: '', contact_message: '' });
+            } else {
+                this.setState({ response: {}, errors: errors });
+            }
         });
 	};
+
+    renderSuccess(){
+        if(Object.keys(this.state.response).length !== 0){
+            return (
+                <SuccessForm result={this.state.response} />
+            )
+        }
+    }
+
+    renderError(){
+        if (Object.keys(this.state.errors).length !== 0) {
+            return (
+                <ErrorForm errors={this.state.errors} />
+            )
+        }
+    }
 
     render() {
         return (
             <div className="container">
-                <div className={`alert alert-${this.state.alert}`}/>
-                    { this.state.message }
+                { this.renderSuccess() }
+                { this.renderError() }
                 <form>
                     <div className="form-group">
                         <label>Nama</label>

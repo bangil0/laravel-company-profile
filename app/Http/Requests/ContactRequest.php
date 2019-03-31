@@ -34,6 +34,7 @@ class ContactRequest extends FormRequest
     public function messages()
     {
         return [
+            'contact_name.min'         => 'Nama harus minimal :min',
             'contact_name.required'    => 'Nama harus di isi',
             'contact_email.required'   => "Email harus di isi",
             'contact_email.email'      => "Email format salah",

@@ -22,7 +22,6 @@ export default class AboutPage extends Component {
 		fetch(`${config.url}/pageabout`)
 		.then((response) => response.json())
 		.then((responseJson) => {
-			console.log(responseJson);
 			this.setState({ result: responseJson});
 		})
 		.catch((error) => {

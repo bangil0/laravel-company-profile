@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\CompanyProfile;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        view()->composer('*', function ($view) {
+            $model = CompanyProfile::first();
+            $view->with('siteTitle', $model->company_name);
+            $view->with('siteLogo', $model->company_logo);
+        });
     }
 
     /**

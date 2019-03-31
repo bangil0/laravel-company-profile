@@ -23,4 +23,5 @@ Route::namespace('API')
             Route::get('pageabout', 'PageController@about');
             Route::get('pagegallery', 'ItemController@gallery');
             Route::post('contact', 'ContactController@store');
+            Route::get('blog', 'PostController@index');
         });

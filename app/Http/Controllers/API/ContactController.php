@@ -17,15 +17,9 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        $contact = new Contact;
-        $contact->contact_name    = $request->contact_name;
-        $contact->contact_email   = $request->contact_email;
-        $contact->contact_subject = $request->contact_subject;
-        $contact->contact_message = $request->contact_message;
-        $contact->save();
-        
+        $contact = Contact::create($request->all());   
         if($contact){
             return response()->json([
                 "status"  => "success",
@@ -35,7 +29,7 @@ class ContactController extends Controller
         } else {
             return response()->json([
                 "status"  => "failed",
-                "message" => "Pesan gagal di kirim",
+                "message" => $validator->failed(),
                 "data"    => $request->all(),
             ]);
         }

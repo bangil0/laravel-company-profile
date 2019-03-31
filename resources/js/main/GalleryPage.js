@@ -20,6 +20,7 @@ export default class GalleryPage extends Component {
 	    this.gotoNext = this.gotoNext.bind(this);
 	    this.gotoPrevious = this.gotoPrevious.bind(this);
 	}
+	
 	componentDidMount()
 	{
 		this.getPageGallery();
