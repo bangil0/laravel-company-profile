@@ -2,8 +2,8 @@
 
 Company Profile with Laravel and React.js
 
-![Tampilan](https://imgur.com/c4SwdRS)
+![Tampilan](https://i.imgur.com/c4SwdRS.png)
 
 Demo : 
 
-![Demo](https://youtu.be/kLHY4vz2TGk)
+![Demo](https://www.youtube.com/watch?v=kLHY4vz2TGk&feature=youtu.be)
